@@ -1,0 +1,41 @@
+/* SortableTable.module.css */
+
+.wrapper {
+  padding: 20px;
+}
+
+.navbar{
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.table {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #007BFF; /* Header background color (blue) */
+  color: white;
+  padding: 1rem;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* Row color for even rows */
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #ffffff; /* Row color for odd rows */
+}
+
+.table tbody tr:hover {
+  background-color: #ddd; /* Row hover color */
+}
