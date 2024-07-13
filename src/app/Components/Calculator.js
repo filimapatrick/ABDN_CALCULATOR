@@ -82,7 +82,7 @@ const Calculator = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>Better Presentation of ABDS Academy 2024 Scoring Rubric</h1>
+      <h1 className={styles.header}> ABDS Academy 2024 Evaluation Sheet</h1>
 
       <div className={styles.personalInfo}>
         <div className={styles.personalInfoGroup}>
