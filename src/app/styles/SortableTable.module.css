@@ -39,3 +39,13 @@
 .table tbody tr:hover {
   background-color: #ddd; /* Row hover color */
 }
+
+
+.filter_country{
+  font-size: 26px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid gray;
+    color: blue;
+    font-weight: 700;
+}

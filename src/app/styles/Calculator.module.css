@@ -79,3 +79,20 @@
     color: #333;
   }
   
+
+
+  .applicant_names{
+    font-size: 26px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid gray;
+  color: blue;
+  font-weight: 700;
+  }
+
+  /* font-size: 26px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid gray;
+  color: blue;
+  font-weight: 700; */

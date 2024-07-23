@@ -4,8 +4,13 @@ import React, { useState } from 'react';
 import styles from '../styles/Calculator.module.css';
 import { db } from '../Services/auth'; // Adjust the path according to your project structure
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
+import { useDetailContext } from '../Steps/DetailContext';
+import SelectApplicant from '../Components/SelectApplicant';
+import ApplicantDetail from '../Components/ApplicantDetail';
 
 const Calculator = () => {
+  const data = useDetailContext();
+
   const criteria = [
     { name: "Academic and Professional Background", weight: 25, points: 25, description: "Evaluates the relevance of the current position and the highest academic degree obtained. Preference for applicants in advanced roles in neuroscience, radiology, or related fields. Strong preference for candidates with advanced degrees (Master’s or Ph.D.) in relevant fields." },
     { name: "Programming Skills", weight: 20, points: 20, description: "Assesses foundational and specific programming skills, especially in Python. Mandatory requirement for foundational programming skills. Proficiency in Python required, with evidence of prior use in data science and analysis projects." },
@@ -75,7 +80,7 @@ const Calculator = () => {
 
   const clearInputs = () => {
     setScores({});
-    setEvaluator({ name: "", country: "", comment: "" });
+    setEvaluator({  comment: "" });
     setEvaluatee({ name: "", country: "" });
     setResults({ totalPoints: 0, totalWeight: 0, percentage: 0 });
   };
@@ -86,6 +91,7 @@ const Calculator = () => {
 
       <div className={styles.personalInfo}>
         <div className={styles.personalInfoGroup}>
+        {/* <pre>{JSON.stringify(data, null, 2)}</pre>{console.log('gggg',data)} */}
           <label htmlFor="evaluatorName">Evaluator's Name:</label>
           <input
             type="text"
@@ -141,6 +147,13 @@ const Calculator = () => {
           />
         </div>
       </div>
+      <div style={{display:'flex', justifyContent:'space-between'}}>
+<div>
+<SelectApplicant label='Choose a Applicant'/> 
+</div>
+
+<ApplicantDetail label='Applicant Details'/> 
+      </div>
 
       <table className={styles.table}>
         <thead>
@@ -173,9 +186,11 @@ const Calculator = () => {
           ))}
         </tbody>
       </table>
+      <div style={{display:'flex', justifyContent:'space-between', textAlign:'left',width:'50%',}}>
       <button onClick={calculateResults} className={styles.button}>Calculate</button>
       <button onClick={saveData} className={styles.button}>Save Data</button>
       <button onClick={clearInputs} className={styles.button}>Clear Inputs</button>
+      </div>
       <div className={styles.results}>
         <h3>Total Points: {results.totalPoints}</h3>
         <h3>Total Weight: {results.totalWeight}</h3>
