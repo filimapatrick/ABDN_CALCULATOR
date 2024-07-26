@@ -1,5 +1,5 @@
 // pages/welcome.js
-import styles from '../styles/welcome.module.css';
+import styles from '../styles/Welcome.module.css';
 import { Button } from 'antd';
 
 export default function Welcome() {
