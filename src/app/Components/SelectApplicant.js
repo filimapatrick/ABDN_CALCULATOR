@@ -3,13 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Drawer, Space, List } from 'antd';
 import { useDetailContext } from '../Steps/DetailContext'; // Adjust the path as per your project structure
-import styles from '../styles/Calculator.module.css'
+import styles from '../styles/Calculator.module.css';
+
 const App = ({ label }) => {
   const { data, setSelectedApplicant } = useDetailContext(); // Access setSelectedApplicant
   const [open, setOpen] = useState(false); // Initialize open as false initially
   const [size, setSize] = useState('default');
   const [isClient, setIsClient] = useState(false); // Track if on client
   const [selectedCountry, setSelectedCountry] = useState(null); // State to track selected country
+  const [focusedCountry, setFocusedCountry] = useState(null); // State to track focused country
+  const [focusedApplicant, setFocusedApplicant] = useState(null); // State to track focused applicant
 
   useEffect(() => {
     setIsClient(true); // Set isClient to true on client-side mount
@@ -25,10 +28,12 @@ const App = ({ label }) => {
 
   const handleCountryClick = (country) => {
     setSelectedCountry(country);
+    setFocusedCountry(country);
   };
 
   const handleApplicantClick = (applicant) => {
     setSelectedApplicant(applicant);
+    setFocusedApplicant(applicant);
     setOpen(false); // Close the drawer when an applicant is clicked
   };
 
@@ -53,7 +58,7 @@ const App = ({ label }) => {
       {open && (
         <Drawer
           title={`${size} Drawer`}
-          placement="left" // Adjust placement as needed
+          placement="left"
           size={size}
           onClose={onClose}
           visible={open}
@@ -73,15 +78,25 @@ const App = ({ label }) => {
               bordered
               dataSource={Array.from(new Set(data.map(item => item['Country of residence'])))} // Get unique countries
               renderItem={country => (
-                <List.Item key={country} onClick={() => handleCountryClick(country)}>
+                <List.Item
+                  key={country}
+                  className={`${styles.country_item} ${focusedCountry === country ? styles.focused : ''}`}
+                  onClick={() => handleCountryClick(country)}
+                  tabIndex={0} // Make it focusable
+                >
                   {country}
                 </List.Item>
               )}
             />
             {/* Display filtered first name and last name based on selected country */}
             {filteredData.map((item, index) => (
-              <p key={index} onClick={() => handleApplicantClick(item)} className={styles.applicant_names}>
-                {item['First Name']} {item['Last Name']}
+              <p
+                key={index}
+                onClick={() => handleApplicantClick(item)}
+                className={`${styles.applicant_item} ${focusedApplicant === item ? styles.focused : ''}`}
+                tabIndex={0} // Make it focusable
+              >
+                {index + 1}. {item['First Name']} {item['Last Name']}
               </p>
             ))}
           </Space>

@@ -90,9 +90,32 @@
   font-weight: 700;
   }
 
-  /* font-size: 26px;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid gray;
-  color: blue;
-  font-weight: 700; */
+
+
+/* Calculator.module.css */
+
+.country_item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.country_item:hover {
+  background-color: #f0f0f0;
+}
+
+.country_item:focus, .country_item.focused {
+  background-color: #d3d3d3;
+}
+
+.applicant_item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.applicant_item:hover {
+  background-color: #e6f7ff;
+}
+
+.applicant_item:focus, .applicant_item.focused {
+  background-color: #bae7ff;
+}
