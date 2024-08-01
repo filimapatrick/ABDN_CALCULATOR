@@ -14,7 +14,7 @@ const Calculator = () => {
   const criteria = [
     { name: "Academic and Professional Background", weight: 25, points: 25, description: "Evaluates the relevance of the current position and the highest academic degree obtained. Preference for applicants in advanced roles in neuroscience, radiology, or related fields. Strong preference for candidates with advanced degrees (Master’s or Ph.D.) in relevant fields." },
     { name: "Programming Skills", weight: 20, points: 20, description: "Assesses foundational and specific programming skills, especially in Python. Mandatory requirement for foundational programming skills. Proficiency in Python required, with evidence of prior use in data science and analysis projects." },
-    { name: "FAIR Data Experience", weight: 10, points: 10, description: "Evaluates demonstrable experience in creating Findable, Accessible, Interoperable, and Reusable brain data. Demonstrable experience in creating FAIR brain data is mandatory." },
+    { name: "FAIR Data Experience", weight: 20, points: 20, description: "Evaluates demonstrable experience in creating Findable, Accessible, Interoperable, and Reusable brain data. Demonstrable experience in creating FAIR brain data is mandatory." },
     { name: "MRI Data Collection Experience", weight: 20, points: 20, description: "Assesses experience in collecting brain MRI data and the quality of that experience. Required for all applicants, with preference for substantial experience. Evaluation of the depth, scope, and impact of previous MRI data collection work." },
     { name: "Research Interests and Experience", weight: 10, points: 10, description: "Assesses the depth and relevance of previous research and collected data. Detailed descriptions of previous research with a focus on relevance to the program’s objectives (MRI || fMRI)." },
     { name: "Motivation and Commitment", weight: 5, points: 5, description: "Evaluates the applicant’s motivation, commitment, and alignment of the program with their career goals. Compelling statement articulating the applicant’s motivation, goals, and how the program fits into their career path. Evidence of the ability to commit to the full program duration, including preparatory work and potential follow-up activities." },
@@ -24,12 +24,14 @@ const Calculator = () => {
   const [results, setResults] = useState({ totalPoints: 0, totalWeight: 0, percentage: 0 });
   const [evaluator, setEvaluator] = useState({ name: "", country: "", comment: "" });
   const [evaluatee, setEvaluatee] = useState({ name: "", country: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e, criterion) => {
     const { value } = e.target;
+    const newValue = Math.min(Number(value), criterion.points);
     setScores((prevScores) => ({
       ...prevScores,
-      [criterion.name]: Number(value),
+      [criterion.name]: newValue,
     }));
   };
 
@@ -62,6 +64,7 @@ const Calculator = () => {
   };
 
   const saveData = async () => {
+    setLoading(true);
     try {
       await addDoc(collection(db, 'applicants'), {
         evaluator,
@@ -75,12 +78,14 @@ const Calculator = () => {
     } catch (error) {
       console.error('Error saving data: ', error);
       alert('Failed to save data.');
+    } finally {
+      setLoading(false);
     }
   };
 
   const clearInputs = () => {
     setScores({});
-    setEvaluator({  comment: "" });
+    setEvaluator({ comment: "" });
     setEvaluatee({ name: "", country: "" });
     setResults({ totalPoints: 0, totalWeight: 0, percentage: 0 });
   };
@@ -91,7 +96,6 @@ const Calculator = () => {
 
       <div className={styles.personalInfo}>
         <div className={styles.personalInfoGroup}>
-        {/* <pre>{JSON.stringify(data, null, 2)}</pre>{console.log('gggg',data)} */}
           <label htmlFor="evaluatorName">Evaluator's Name:</label>
           <input
             type="text"
@@ -148,11 +152,10 @@ const Calculator = () => {
         </div>
       </div>
       <div style={{display:'flex', justifyContent:'space-between'}}>
-<div>
-<SelectApplicant label='Choose a Applicant'/> 
-</div>
-
-<ApplicantDetail label='Applicant Details'/> 
+        <div>
+          <SelectApplicant label='Choose an Applicant'/> 
+        </div>
+        <ApplicantDetail label='Applicant Details'/> 
       </div>
 
       <table className={styles.table}>
@@ -186,10 +189,12 @@ const Calculator = () => {
           ))}
         </tbody>
       </table>
-      <div style={{display:'flex', justifyContent:'space-between', textAlign:'left',width:'50%',}}>
-      <button onClick={calculateResults} className={styles.button}>Calculate</button>
-      <button onClick={saveData} className={styles.button}>Save Data</button>
-      <button onClick={clearInputs} className={styles.button}>Clear Inputs</button>
+      <div style={{display:'flex', justifyContent:'space-between', textAlign:'left', width:'50%'}}>
+        <button onClick={calculateResults} className={styles.button}>Calculate</button>
+        <button onClick={saveData} className={styles.button} disabled={loading}>
+          {loading ? 'Saving...' : 'Save Data'}
+        </button>
+        <button onClick={clearInputs} className={styles.button}>Clear Inputs</button>
       </div>
       <div className={styles.results}>
         <h3>Total Points: {results.totalPoints}</h3>

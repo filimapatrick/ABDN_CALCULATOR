@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useEffect, useState } from "react";
 import { Button, Drawer, Space, Input, Pagination } from 'antd';
 import styles from '../styles/SortableTable.module.css';
@@ -22,9 +23,10 @@ const Result = () => {
         const applicantsCollection = collection(db, 'applicants');
         const applicantsSnapshot = await getDocs(applicantsCollection);
         const applicantsData = applicantsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  
         setApplicants(applicantsData);
         setFilteredApplicants(applicantsData);
-
+  
         const countriesData = applicantsSnapshot.docs.map(doc => doc.data().evaluatee.country);
         const uniqueCountries = [...new Set(countriesData)];
         setCountries(uniqueCountries);
@@ -32,7 +34,7 @@ const Result = () => {
         console.error("Error fetching applicants: ", error);
       }
     };
-
+  
     fetchApplicants();
   }, []);
 
@@ -72,8 +74,14 @@ const Result = () => {
     setCurrentPage(1);
   };
 
-  const sortApplicantsByTotalPoints = (applicants) => {
-    return applicants.sort((a, b) => b.results.totalPoints - a.results.totalPoints);
+  const sortApplicantsByTotalPointsAndName = (applicants) => {
+    return applicants.sort((a, b) => {
+      if (b.results.totalPoints !== a.results.totalPoints) {
+        return b.results.totalPoints - a.results.totalPoints;
+      } else {
+        return a.evaluatee.name.localeCompare(b.evaluatee.name);
+      }
+    });
   };
 
   const handlePageChange = (page, pageSize) => {
@@ -81,7 +89,7 @@ const Result = () => {
     setPageSize(pageSize);
   };
 
-  const paginatedApplicants = sortApplicantsByTotalPoints(filteredApplicants).slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  const paginatedApplicants = sortApplicantsByTotalPointsAndName(filteredApplicants).slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   return (
     <div id="wrapper" className={styles.wrapper}>
