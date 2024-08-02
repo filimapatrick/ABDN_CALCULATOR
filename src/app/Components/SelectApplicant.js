@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { Button, Drawer, Space, List } from 'antd';
@@ -13,6 +13,7 @@ const App = ({ label }) => {
   const [selectedCountry, setSelectedCountry] = useState(null); // State to track selected country
   const [focusedCountry, setFocusedCountry] = useState(null); // State to track focused country
   const [focusedApplicant, setFocusedApplicant] = useState(null); // State to track focused applicant
+  const [secondDrawerOpen, setSecondDrawerOpen] = useState(false); // Track if the second drawer is open
 
   useEffect(() => {
     setIsClient(true); // Set isClient to true on client-side mount
@@ -24,17 +25,19 @@ const App = ({ label }) => {
 
   const onClose = () => {
     setOpen(false);
+    setSecondDrawerOpen(false); // Close both drawers
   };
 
   const handleCountryClick = (country) => {
     setSelectedCountry(country);
     setFocusedCountry(country);
+    setSecondDrawerOpen(true); // Open the second drawer when a country is clicked
   };
 
   const handleApplicantClick = (applicant) => {
     setSelectedApplicant(applicant);
     setFocusedApplicant(applicant);
-    setOpen(false); // Close the drawer when an applicant is clicked
+    setSecondDrawerOpen(false); // Close the second drawer when an applicant is clicked
   };
 
   if (!isClient) {
@@ -54,10 +57,10 @@ const App = ({ label }) => {
           {label}
         </Button>
       </Space>
-      {/* Render the Drawer conditionally on the client */}
+      {/* Render the first Drawer conditionally on the client */}
       {open && (
         <Drawer
-          title={`${size} Drawer`}
+          title={'Applicants country'}
           placement="left"
           size={size}
           onClose={onClose}
@@ -88,6 +91,27 @@ const App = ({ label }) => {
                 </List.Item>
               )}
             />
+          </Space>
+        </Drawer>
+      )}
+      {/* Render the second Drawer conditionally on the client */}
+      {secondDrawerOpen && (
+        <Drawer
+          title="Applicants"
+          placement="right"
+          size={size}
+          onClose={() => setSecondDrawerOpen(false)}
+          visible={secondDrawerOpen}
+          footer={
+            <Space>
+              <Button onClick={() => setSecondDrawerOpen(false)}>Cancel</Button>
+              <Button type="primary" onClick={() => setSecondDrawerOpen(false)}>
+                OK
+              </Button>
+            </Space>
+          }
+        >
+          <Space direction="vertical">
             {/* Display filtered first name and last name based on selected country */}
             {filteredData.map((item, index) => (
               <p

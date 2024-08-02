@@ -45,46 +45,55 @@
     width: 100% !important;
   }
   
+
+  
   .lorem {
-    align-items: center;
-    display: flex;
-    flex-flow: row wrap;
-    height: 100vh;
-    justify-content: center;
-  }
-  
-  .container {
-    background: #404040;
-    box-shadow: 0 15px 18px -10px black;
-    font-size: 1.1em;
-    margin: 1em;
-    padding: 1.5em;
-    width: 25em;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4; /* Light gray background */
+  padding: 20px;
+}
 
+.container {
+  background-color: #ffffff; /* White background */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 20px;
+  max-width: 400px;
+  text-align: center;
+  border: 1px solid #e0e0e0; /* Light gray border */
+}
 
-  .buttonContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .roleButton {
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    margin: 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .roleButton:hover {
-    background-color: #0056b3;
-  }
-  
+.container p {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333; /* Dark gray text */
+  margin-bottom: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.roleButton {
+  background-color: #007bff; /* Blue background */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.roleButton:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.roleButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Focus ring */
+}

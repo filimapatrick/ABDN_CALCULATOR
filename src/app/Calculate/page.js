@@ -11,7 +11,7 @@ import UserGuide from '../Components/UserGuide';
 
 const Calculator = () => {
   const data = useDetailContext();
-  console.log(data.selectedApplicant)
+  console.log(data.selectedApplicant);
 
   const criteria = [
     { name: "Academic and Professional Background", weight: 25, points: 25, description: "Evaluates the relevance of the current position and the highest academic degree obtained. Preference for applicants in advanced roles in neuroscience, radiology, or related fields. Strong preference for candidates with advanced degrees (Master’s or Ph.D.) in relevant fields." },
@@ -29,7 +29,7 @@ const Calculator = () => {
   const [loading, setLoading] = useState(false);
   const [canSave, setCanSave] = useState(false);
   const [showGuide, setShowGuide] = useState(true); // State to control the guide popup
-
+  const [error, setError] = useState(""); // State for error message
 
   useEffect(() => {
     if (data.selectedApplicant) {
@@ -73,6 +73,8 @@ const Calculator = () => {
       totalPoints += score;
       totalWeight += criterion.weight;
     });
+
+    
     const percentage = (totalPoints / totalWeight) * 100;
     setResults({ totalPoints, totalWeight, percentage });
     setCanSave(true);
@@ -80,6 +82,10 @@ const Calculator = () => {
 
   const saveData = async () => {
     if (!canSave) return;
+    if (!evaluator.name) {
+      setError("Evaluator's name is required.");
+      return;
+    }
     setLoading(true);
     try {
       await addDoc(collection(db, 'applicants'), {
@@ -105,11 +111,12 @@ const Calculator = () => {
     setEvaluatee({ name: "", country: "" });
     setResults({ totalPoints: 0, totalWeight: 0, percentage: 0 });
     setCanSave(false);
+    setError(""); // Clear error message
   };
 
   return (
     <div className={styles.container}>
-           {showGuide && <UserGuide onClose={() => setShowGuide(false)} />} {/* Show the guide if showGuide is true */}
+      {showGuide && <UserGuide onClose={() => setShowGuide(false)} />} {/* Show the guide if showGuide is true */}
       <h1 className={styles.header}> ABDS Academy 2024 Evaluation Sheet</h1>
 
       <div className={styles.personalInfo}>
@@ -134,6 +141,7 @@ const Calculator = () => {
             value={evaluator.country}
             onChange={handleEvaluatorChange}
             className={styles.input}
+            required
           />
         </div>
         <div className={styles.personalInfoGroup}>
@@ -169,11 +177,12 @@ const Calculator = () => {
           />
         </div>
       </div>
-      <div style={{display:'flex', justifyContent:'space-between'}}>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>
-          <SelectApplicant label='Choose an Applicant'/> 
+          <SelectApplicant label='Choose an Applicant' /> 
         </div>
-        <ApplicantDetail label='Applicant Details'/> 
+        <ApplicantDetail label='Applicant Details' /> 
       </div>
 
       <table className={styles.table}>
@@ -207,7 +216,8 @@ const Calculator = () => {
           ))}
         </tbody>
       </table>
-      <div style={{display:'flex', justifyContent:'space-between', textAlign:'left', width:'50%'}}>
+      {error && <p className={styles.error}>{error}</p>} {/* Display error message if exists */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', textAlign: 'left', width: '50%' }}>
         <button onClick={calculateResults} className={styles.button}>Calculate</button>
         <button onClick={saveData} className={styles.button} disabled={!canSave || loading}>
           {loading ? 'Saving...' : 'Save Data'}

@@ -91,8 +91,7 @@
   }
 
 
-
-/* Calculator.module.css */
+  
 
 .country_item {
   padding: 10px;
@@ -118,4 +117,37 @@
 
 .applicant_item:focus, .applicant_item.focused {
   background-color: #bae7ff;
+}
+
+
+
+.input, .textarea {
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Padding inside the input */
+  margin: 5px 0; /* Margin between input fields */
+  font-size: 16px; /* Font size for better readability */
+  transition: all 0.3s ease; /* Smooth transition for focus effects */
+  width: 100%;
+}
+
+.input:focus, .textarea:focus {
+  border-color: #007bff; /* Blue border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue shadow on focus */
+  outline: none; /* Remove default outline */
+}
+
+.textarea {
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 100px; /* Minimum height for textarea */
+}
+
+.personalInfoGroup {
+  margin-bottom: 20px; /* Space between input groups */
+}
+
+.error {
+  color: red; /* Red color for error messages */
+  font-size: 14px; /* Font size for error messages */
+  margin-top: 10px; /* Space above error messages */
 }

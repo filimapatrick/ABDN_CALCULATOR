@@ -13,7 +13,7 @@ const UserGuide = ({ onClose }) => {
           <li>Select an applicant's from the drawer.</li>
           <li>The selected applicant's details will be auto-filled in the 'Evaluatee' fields.</li>
           <li>Enter your name and country in the 'Evaluator' fields.</li>
-          <li>Click on the button "Applican'ts Detail" to view the applican'ts information</li>
+          <li>Click on the button "Applicant's Detail" to view the applican'ts information</li>
           <li>Review the applicant's details and fill in the scores for each criterion based on the descriptions provided.</li>
           <li>Click the 'Calculate' button to compute the total points and percentage.</li>
           <li>After calculating, you can save the evaluation by clicking the 'Save Data' button.</li>
