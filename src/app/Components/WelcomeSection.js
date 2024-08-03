@@ -23,7 +23,7 @@ const WelcomeSection = () => {
       <Content className={styles.content}>
         <div className={styles.hero}>
           <div className={styles.title}>ABDN 2024 Evaluation</div>
-          <div className={styles.subtitle}>Join our second Brain Data Science Program</div>
+          <div className={styles.subtitle}>Advancing sustainable brain research, education, and innovation in Africa through the responsible collection, processing, sharing, and use of big brain data.</div>
           <div className={styles.buttonContainer}>
             <Link href='./Calculate'>
               <Button type="primary" className={styles.roleButton}>Evaluator</Button>
