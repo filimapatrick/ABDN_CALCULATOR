@@ -1,99 +1,112 @@
-/* components/WelcomeSection.module.css */
+/* styles/WelcomeSection.module.css */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
-.welcome {
-    color: #555;
-    text-shadow: 0 1px 3px white, -10px 0 8px black;
-    display: flex;
-    height: 100%;
-    min-height: 100vh;
-    min-width: 100vw;
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-  }
-  
-  .welcome div:hover {
-    text-shadow: 0 0 1px white, 0 0 0 black;
-  }
-  
-  .welcome div {
-    align-items: center;
-    background: #333;
-    box-shadow: 0 0 100px black;
-    cursor: pointer;
-    display: flex;
-    font-size: 5em;
-    font-weight: bold;
-    width: 50%;
-  }
-  
-  .left {
-    justify-content: flex-end;
-  }
-  
-  .right {
-    justify-content: flex-start !important;
-  }
-  
-  .Of {
-    justify-content: flex-end;
-    width: 0 !important;
-    visibility: hidden;
-  }
-  
-  .On {
-    width: 100% !important;
-  }
-  
-
-  
-  .lorem {
+.layout {
   display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background: #1a1a1a;
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: #fff;
+  font-style: italic;
+  text-transform: uppercase;
+  font-size: 24px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f4f4f4; /* Light gray background */
-  padding: 20px;
+  padding: 100px 20px;
+  background: url('/abdn.jpg') center/cover no-repeat;
 }
 
-.container {
-  background-color: #ffffff; /* White background */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  padding: 20px;
-  max-width: 400px;
+.content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero {
   text-align: center;
-  border: 1px solid #e0e0e0; /* Light gray border */
+  color: white;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px;
+  position: relative;
+  z-index: 2;
+  animation: fadeIn 2s ease-in-out;
 }
 
-.container p {
-  font-size: 18px;
-  font-weight: 500;
-  color: #333; /* Dark gray text */
+.title {
+  font-size: 60px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 24px;
   margin-bottom: 20px;
+  text-align: center;
+  color: #ddd;
+}
+
+.paragraph {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #fff;
 }
 
 .buttonContainer {
   display: flex;
-  justify-content: space-around;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .roleButton {
-  background-color: #007bff; /* Blue background */
-  color: #fff; /* White text */
-  border: none;
-  border-radius: 8px; /* Rounded corners */
-  padding: 10px 20px;
+  width: 150px;
+  height: 45px;
   font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .roleButton:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.1);
 }
 
-.roleButton:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Focus ring */
+.footer {
+  text-align: center;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 30px 0;
 }

@@ -1,48 +1,36 @@
 // components/WelcomeSection.js
-'use client'
-import { useEffect } from 'react';
-import styles from '../styles/WelcomeSection.module.css';
+'use client';
+import React from 'react';
+import { Layout, Button } from 'antd';
 import Link from 'next/link';
+import styles from '../styles/WelcomeSection.module.css';
+
+const { Header, Content, Footer } = Layout;
 
 const WelcomeSection = () => {
-  useEffect(() => {
-    const divs = document.getElementById('welcome').getElementsByTagName('div');
-    for (let i = 0; i < divs.length; i++) {
-      divs[i].onclick = splitScreen;
-    }
-
-    function splitScreen() {
-      document.getElementById('welcome').style.visibility = 'hidden';
-      const split = document.getElementById('Of');
-      if (true) {
-        split.className = 'On';
-        divs[0].className = 'Of';
-        divs[1].className = 'Of';
-      }
-    }
-  }, []);
-
   return (
-    <>
-      <section id='welcome' className={styles.welcome}>
-        <div id='left' className={styles.left}>WELCOME {''}ABDN</div>
-        <span id='Of' className={styles.Of}></span>
-        <div id='right' className={styles.right}> EVALUATOR!</div>
-      </section>
-     
-     
-     
-      <div id='lorem' className={styles.lorem}>
-        <div className={styles.container}>
-           <p>please! specify your role.</p>
-        <div className={styles.buttonContainer}>
-        <Link href='./Calculate'> <button className={styles.roleButton}>Evaluator</button></Link>  
-        <Link href='./Login'>   <button className={styles.roleButton}>Admin</button></Link>
+    <Layout className={styles.layout}>
+      <Header className={styles.header}>
+        <div className={styles.logo}>African Brain Data Network</div>
+      </Header>
+      <Content className={styles.content}>
+        <div className={styles.hero}>
+          <div className={styles.title}>ABDN 2024 Evaluation</div>
+          <div className={styles.subtitle}>Join our second Brain Data Science Program</div>
+          <div className={styles.buttonContainer}>
+            <Link href='./Calculate'>
+              <Button type="primary" className={styles.roleButton}>Evaluator</Button>
+            </Link>
+            <Link href='./Login'>
+              <Button type="default" className={styles.roleButton}>Admin</Button>
+            </Link>
+          </div>
         </div>
-        </div>
-
-      </div>
-    </>
+      </Content>
+      <Footer className={styles.footer}>
+        <p>© 2024 African Brain Data Network. All rights reserved.</p>
+      </Footer>
+    </Layout>
   );
 };
 
