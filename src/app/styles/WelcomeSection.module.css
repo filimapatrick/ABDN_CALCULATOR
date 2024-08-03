@@ -1,4 +1,4 @@
-/* styles/WelcomeSection.module.css */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -28,6 +28,27 @@
   text-transform: uppercase;
   font-size: 24px;
   animation: fadeIn 2s ease-in-out;
+}
+
+
+.header {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 20px;
+  background-color: #1a1a1a;
+}
+
+.abdnLogo {
+  height: 51px;
+  width: 84px;
+  display: flex;
+  align-items: center; 
+}
+
+.abdnLogo img {
+  height: 80px;
+  width: 80px;
 }
 
 .content {
