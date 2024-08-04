@@ -1,4 +1,4 @@
-// pages/welcome.js
+
 import styles from '../styles/Welcome.module.css';
 import { Button } from 'antd';
 

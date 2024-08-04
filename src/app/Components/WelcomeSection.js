@@ -1,4 +1,4 @@
-// components/WelcomeSection.js
+
 'use client';
 import React from 'react';
 import { Layout, Button } from 'antd';

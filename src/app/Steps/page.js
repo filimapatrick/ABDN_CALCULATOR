@@ -1,8 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { Button, message, Steps, theme, Form, Input } from 'antd';
-// import { DetailProvider } from './Steps/DetailContext';
-// import Detail from '../Steps/DetailContext';
+
 
 export default function Detail() {
   const { token } = theme.useToken();

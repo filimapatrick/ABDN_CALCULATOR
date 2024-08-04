@@ -1,33 +1,90 @@
 
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(89.2deg, rgb(191, 241, 236) 22.3%, rgb(109, 192, 236) 84.1%);
+  }
+  
+  .input{
+    height: 3rem;
+    border: 0.1px solid blue;
+  }
 
-.form {
+  .submit{
+    width: 6rem;
+    padding: 1rem;
+  }
+
+  .wrapper {
+    width: 768px;
+    height: 480px;
+    display: flex;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    border-radius: 10px;
+  }
+  
+  .signin_container, .signup_container {
+    flex: 1;
+    padding: 50px;
     display: flex;
     flex-direction: column;
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.inputField {
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.button {
-    padding: 0.75rem;
-    background-color: #0070f3;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .signin_container {
+    background-color: white;
+  }
+  
+  .signup_container {
+    background: linear-gradient(109.6deg, rgb(62, 161, 219) 11.2%, rgb(93, 52, 236) 100.2%);
     color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .title {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .social_container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .social_button {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 10px;
+    padding: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.button:hover {
-    background-color: #005bb5;
-}
+  }
+  
+  .social_button:hover {
+    background-color: #f6f5f7;
+  }
+  
+  .button {
+    border-radius: 20px;
+    background-color: #ff4b2b;
+    border-color: #ff4b2b;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 20px;
+  }
+  
+  .button:hover {
+    background-color: #ff416c;
+    border-color: #ff416c;
+  }
+  

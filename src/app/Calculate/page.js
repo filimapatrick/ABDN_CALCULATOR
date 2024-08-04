@@ -111,10 +111,11 @@ const Calculator = () => {
     setEvaluatee({ name: "", country: "" });
     setResults({ totalPoints: 0, totalWeight: 0, percentage: 0 });
     setCanSave(false);
-    setError(""); // Clear error message
+    setError(""); 
   };
 
   return (
+  <div className={styles.parentContainer}> 
     <div className={styles.container}>
       {showGuide && <UserGuide onClose={() => setShowGuide(false)} />} {/* Show the guide if showGuide is true */}
       <h1 className={styles.header}> ABDS Academy 2024 Evaluation Sheet</h1>
@@ -229,6 +230,7 @@ const Calculator = () => {
         <h3>Total Weight: {results.totalWeight}</h3>
         <h3>Percentage: {results.percentage.toFixed(2)}%</h3>
       </div>
+    </div>
     </div>
   );
 };

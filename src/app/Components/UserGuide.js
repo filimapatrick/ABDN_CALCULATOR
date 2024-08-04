@@ -1,4 +1,4 @@
-// UserGuide.js
+
 import React from 'react';
 import styles from '../styles/UserGuide.module.css';
 
